@@ -81,18 +81,23 @@ app = FastAPI(
 
 
 
+def _cors_origins() -> list[str]:
+    import os
+
+    raw = os.environ.get(
+        "CORS_ORIGINS",
+        "http://localhost:3000,http://127.0.0.1:3000",
+    )
+    origins = [o.strip() for o in raw.split(",") if o.strip()]
+    return origins or ["*"]
+
+
 app.add_middleware(
-
     CORSMiddleware,
-
-    allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"],
-
+    allow_origins=_cors_origins(),
     allow_credentials=True,
-
     allow_methods=["*"],
-
     allow_headers=["*"],
-
 )
 
 
@@ -192,32 +197,48 @@ def list_documents() -> list[DocumentSummary]:
 
 
 @app.post("/ingest")
-
 async def ingest(file: UploadFile = File(...)) -> dict:
-
     settings = get_settings()
+    raw_name = Path(file.filename or "upload.pdf").name
+    if not raw_name.lower().endswith(".pdf"):
+        raise HTTPException(status_code=400, detail="Only PDF files are supported.")
 
     upload_dir = settings.resolve_path(settings.data_dir) / "uploads"
-
     upload_dir.mkdir(parents=True, exist_ok=True)
-
-    dest = upload_dir / (file.filename or "upload.pdf")
+    dest = upload_dir / raw_name
+    if dest.exists():
+        stem = dest.stem
+        suffix = dest.suffix
+        n = 1
+        while dest.exists():
+            dest = upload_dir / f"{stem}_{n}{suffix}"
+            n += 1
 
     dest.write_bytes(await file.read())
 
-    report = ingest_pdf(dest, settings=settings)
-
     try:
+        report = ingest_pdf(dest, settings=settings)
+    except Exception as exc:
+        logger.exception("ingest_pdf failed for %s", raw_name)
+        raise HTTPException(status_code=500, detail=f"Ingestion failed: {exc}") from exc
 
-        from indexing.store import build_document_index
+    if report.status == "failed":
+        raise HTTPException(
+            status_code=422,
+            detail={"message": "Could not process PDF.", "errors": report.errors},
+        )
 
+    if not report.ingestion_cache_hit:
+        try:
+            from indexing.store import index_document_vectors
 
-
-        build_document_index(settings.resolve_path(settings.index_dir), rebuild_vectors=True)
-
-    except Exception:
-
-        pass
+            index_document_vectors(settings.resolve_path(settings.index_dir), report.doc_id)
+        except Exception as exc:
+            logger.exception("Index update failed after ingest for %s", report.doc_id)
+            raise HTTPException(
+                status_code=503,
+                detail=f"Document parsed but search index update failed: {exc}",
+            ) from exc
 
     return report.model_dump()
 

@@ -1,4 +1,7 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+/** Same-origin `/api` proxy (see next.config.mjs) avoids browser CORS on upload. */
+const API_BASE = (
+  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, "") || "/api"
+).trim();
 
 export type BBox = { x0: number; y0: number; x1: number; y1: number };
 
@@ -70,10 +73,32 @@ export async function askQuestion(question: string, docIds?: string[]) {
   });
 }
 
-export async function uploadPdf(file: File) {
+export type IngestResponse = {
+  doc_id: string;
+  doc_name: string;
+  status: string;
+  pages_total: number;
+  sha256?: string;
+  errors?: string[];
+};
+
+function parseApiError(text: string, status: number): string {
+  try {
+    const body = JSON.parse(text) as { detail?: string | { message?: string } };
+    const d = body.detail;
+    if (typeof d === "string") return d;
+    if (d && typeof d === "object" && "message" in d && d.message) return d.message;
+  } catch {
+    /* plain text */
+  }
+  return text || `Request failed (${status})`;
+}
+
+export async function uploadPdf(file: File): Promise<IngestResponse> {
   const form = new FormData();
   form.append("file", file);
   const res = await fetch(`${API_BASE}/ingest`, { method: "POST", body: form });
-  if (!res.ok) throw new Error(await res.text());
-  return res.json();
+  const text = await res.text();
+  if (!res.ok) throw new Error(parseApiError(text, res.status));
+  return JSON.parse(text) as IngestResponse;
 }

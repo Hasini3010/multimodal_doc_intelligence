@@ -39,7 +39,8 @@ def ingest_pdf(pdf_path: Path, settings: Settings | None = None) -> IngestionRep
         meta = json.loads((index_root / "meta.json").read_text(encoding="utf-8"))
         if meta.get("sha256") == sha:
             logger.info("Cache hit for %s (%s)", doc_name, doc_id)
-            return IngestionReport.model_validate(meta["report"])
+            cached = IngestionReport.model_validate(meta["report"])
+            return cached.model_copy(update={"ingestion_cache_hit": True})
 
     index_root.mkdir(parents=True, exist_ok=True)
     pages_dir = index_root / "pages"

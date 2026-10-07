@@ -138,6 +138,73 @@ def _build_chroma(
     )
 
 
+def index_document_vectors(index_dir: Path, doc_id: str) -> DocumentIndex:
+    """After ingesting one PDF, embed only that document and refresh BM25 (no full re-embed)."""
+    index_dir = Path(index_dir)
+    doc_dir = index_dir / doc_id
+    el_path = doc_dir / "elements.json"
+    if not el_path.exists():
+        logger.warning("No elements.json for doc_id=%s; skipping vector index", doc_id)
+        return build_document_index(index_dir, rebuild_vectors=False)
+
+    doc_rows = json.loads(el_path.read_text(encoding="utf-8"))
+    new_ids: list[str] = []
+    new_texts: list[str] = []
+    for raw in doc_rows:
+        text = element_search_text(raw)
+        new_ids.append(raw["element_id"])
+        new_texts.append(text)
+
+    doc_index = build_document_index(index_dir, rebuild_vectors=False)
+    if not new_ids:
+        return doc_index
+
+    manifest_path = index_dir / "vector_manifest.json"
+    if not manifest_path.exists():
+        return build_document_index(index_dir, rebuild_vectors=True)
+
+    _upsert_chroma_embeddings(index_dir, doc_index, new_ids, new_texts)
+    return doc_index
+
+
+def _upsert_chroma_embeddings(
+    index_dir: Path,
+    doc_index: DocumentIndex,
+    ids: list[str],
+    texts: list[str],
+) -> None:
+    import chromadb
+    from chromadb.config import Settings as ChromaSettings
+
+    persist = index_dir / "chroma"
+    persist.mkdir(parents=True, exist_ok=True)
+    client = chromadb.PersistentClient(
+        path=str(persist),
+        settings=ChromaSettings(anonymized_telemetry=False),
+    )
+    collection = client.get_or_create_collection(
+        name="elements",
+        metadata={"hnsw:space": "cosine"},
+    )
+    vectors = embed_texts(texts)
+    batch = 64
+    for i in range(0, len(ids), batch):
+        sl = slice(i, i + batch)
+        collection.upsert(
+            ids=ids[sl],
+            embeddings=vectors[sl],
+            documents=texts[sl],
+        )
+    doc_index.chroma_collection = collection
+    manifest = {
+        "count": len(doc_index.elements),
+        "embedding_model": "BAAI/bge-m3",
+    }
+    (index_dir / "vector_manifest.json").write_text(
+        json.dumps(manifest, indent=2), encoding="utf-8"
+    )
+
+
 def load_document_index(index_dir: Path) -> DocumentIndex:
     manifest_path = index_dir / "vector_manifest.json"
     if not manifest_path.exists():

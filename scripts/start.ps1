@@ -21,7 +21,8 @@ $backend = Start-Process -PassThru -WindowStyle Minimized -FilePath "$Root\.venv
 
 Start-Sleep -Seconds 2
 Push-Location frontend
-$env:NEXT_PUBLIC_API_URL = "http://localhost:8000"
+# Frontend calls the backend via same-origin /api proxy (next.config.mjs → BACKEND_URL).
+Remove-Item Env:NEXT_PUBLIC_API_URL -ErrorAction SilentlyContinue
 npm run dev
 Pop-Location
 

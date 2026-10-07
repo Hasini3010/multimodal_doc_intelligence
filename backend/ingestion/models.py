@@ -46,3 +46,4 @@ class IngestionReport(BaseModel):
     errors: list[str] = Field(default_factory=list)
     layout_backend: str = "pymupdf"
     elements_count: int = 0
+    ingestion_cache_hit: bool = False
