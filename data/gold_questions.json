@@ -1,0 +1,692 @@
+[
+  {
+    "id": "q001",
+    "question": "What was Q4 production efficiency percentage?",
+    "type": "table",
+    "expected_answer": "89.2",
+    "expected_numeric": 89.2,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q002",
+    "question": "What was Q2 production efficiency percentage?",
+    "type": "table",
+    "expected_answer": "84.0",
+    "expected_numeric": 84.0,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q003",
+    "question": "By how many percentage points did efficiency change from Q2 to Q4?",
+    "type": "math",
+    "expected_answer": "5.2",
+    "expected_numeric": 5.2,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Requires math tool; do not let LLM compute."
+  },
+  {
+    "id": "q004",
+    "question": "List the three biggest reasons given for the Q2 to Q4 efficiency improvement.",
+    "type": "text",
+    "expected_answer": "Predictive maintenance rollout reduced unplanned downtime.; Operator cross-training improved line changeover speed.; Supplier quality program lowered incoming defect rates.",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q005",
+    "question": "What peak efficiency percentage appears on the line chart for Q3?",
+    "type": "chart",
+    "expected_answer": "91.7",
+    "expected_numeric": 91.7,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Value only on chart, not in table."
+  },
+  {
+    "id": "q006",
+    "question": "Compare production efficiency between Q2 and Q4 and identify the three biggest reasons for the change.",
+    "type": "cross_doc",
+    "expected_answer": "Q2 84.0% vs Q4 89.2%; causes: Predictive maintenance rollout reduced unplanned downtime.; Operator cross-training improved line changeover speed.; Supplier quality program lowered incoming defect rates.",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Demo question \u2014 text + table + chart."
+  },
+  {
+    "id": "q007",
+    "question": "How many units were produced in Q3?",
+    "type": "table",
+    "expected_answer": "46000",
+    "expected_numeric": 46000.0,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q008",
+    "question": "What was Q1 downtime in hours?",
+    "type": "table",
+    "expected_answer": "120.0",
+    "expected_numeric": 120.0,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q009",
+    "question": "Which quarter had the highest defect rate?",
+    "type": "table",
+    "expected_answer": "Q1",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q010",
+    "question": "What is Plant B total units in 2025?",
+    "type": "table",
+    "expected_answer": "97700",
+    "expected_numeric": 97700.0,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q011",
+    "question": "Which plant has higher average efficiency, Plant A or Plant B?",
+    "type": "cross_doc",
+    "expected_answer": "Plant B",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q012",
+    "question": "What is Plant A site location?",
+    "type": "text",
+    "expected_answer": "Midwest",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q013",
+    "question": "What hybrid retrieval accuracy percent is reported in the research paper?",
+    "type": "table",
+    "expected_answer": "78.3",
+    "expected_numeric": 78.3,
+    "expected_docs": [
+      "research_paper_two_column.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q014",
+    "question": "What mean query latency in ms is reported?",
+    "type": "text",
+    "expected_answer": "412",
+    "expected_numeric": 412.0,
+    "expected_docs": [
+      "research_paper_two_column.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q015",
+    "question": "What F1 equation is stated in the paper?",
+    "type": "text",
+    "expected_answer": "F1 = 2 * (precision * recall) / (precision + recall)",
+    "expected_numeric": null,
+    "expected_docs": [
+      "research_paper_two_column.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "u001",
+    "question": "What is the 2024 revenue mentioned in the documents?",
+    "type": "unanswerable",
+    "expected_answer": "not found in the provided documents",
+    "expected_numeric": null,
+    "expected_docs": [],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Must abstain."
+  },
+  {
+    "id": "u002",
+    "question": "What is the CEO home address mentioned in the documents?",
+    "type": "unanswerable",
+    "expected_answer": "not found in the provided documents",
+    "expected_numeric": null,
+    "expected_docs": [],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Must abstain."
+  },
+  {
+    "id": "u003",
+    "question": "What is the Mars colony production mentioned in the documents?",
+    "type": "unanswerable",
+    "expected_answer": "not found in the provided documents",
+    "expected_numeric": null,
+    "expected_docs": [],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Must abstain."
+  },
+  {
+    "id": "u004",
+    "question": "What is the employee social security numbers mentioned in the documents?",
+    "type": "unanswerable",
+    "expected_answer": "not found in the provided documents",
+    "expected_numeric": null,
+    "expected_docs": [],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Must abstain."
+  },
+  {
+    "id": "u005",
+    "question": "What is the stock ticker symbol mentioned in the documents?",
+    "type": "unanswerable",
+    "expected_answer": "not found in the provided documents",
+    "expected_numeric": null,
+    "expected_docs": [],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Must abstain."
+  },
+  {
+    "id": "q016",
+    "question": "Q4 defect rate percent?",
+    "type": "table",
+    "expected_answer": "1.5",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q017",
+    "question": "Q2 units produced?",
+    "type": "table",
+    "expected_answer": "44500",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q018",
+    "question": "Sum of Q1 and Q2 units?",
+    "type": "math",
+    "expected_answer": "86500",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q019",
+    "question": "Plant B average efficiency?",
+    "type": "table",
+    "expected_answer": "87.4",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q020",
+    "question": "Plant A total units?",
+    "type": "table",
+    "expected_answer": "82000",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q021",
+    "question": "Does Q4 have lower downtime than Q2?",
+    "type": "text",
+    "expected_answer": "yes",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q022",
+    "question": "Title of research paper?",
+    "type": "text",
+    "expected_answer": "Hybrid Retrieval for Document QA",
+    "expected_numeric": null,
+    "expected_docs": [
+      "research_paper_two_column.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q023",
+    "question": "Which Q has 46000 units?",
+    "type": "table",
+    "expected_answer": "Q3",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q024",
+    "question": "Q3 efficiency in table?",
+    "type": "table",
+    "expected_answer": "88.5",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q025",
+    "question": "Combined Plant A and B units?",
+    "type": "math",
+    "expected_answer": "179700",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q026",
+    "question": "First Q2\u2013Q4 cause text?",
+    "type": "text",
+    "expected_answer": "Predictive maintenance rollout reduced unplanned downtime.",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q027",
+    "question": "Second Q2\u2013Q4 cause?",
+    "type": "text",
+    "expected_answer": "Operator cross-training improved line changeover speed.",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q028",
+    "question": "Third Q2\u2013Q4 cause?",
+    "type": "text",
+    "expected_answer": "Supplier quality program lowered incoming defect rates.",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q029",
+    "question": "Q1 efficiency?",
+    "type": "table",
+    "expected_answer": "82.4",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q030",
+    "question": "Q4 downtime hours?",
+    "type": "table",
+    "expected_answer": "88.0",
+    "expected_numeric": null,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "s001",
+    "question": "Q4 efficiency from scanned report?",
+    "type": "scanned",
+    "expected_answer": "89.2",
+    "expected_numeric": null,
+    "expected_docs": [
+      "scanned_quarterly_report.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "s002",
+    "question": "Is scanned report readable at all?",
+    "type": "scanned",
+    "expected_answer": "partial",
+    "expected_numeric": null,
+    "expected_docs": [
+      "scanned_quarterly_report.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Degraded scan"
+  },
+  {
+    "id": "img001",
+    "question": "Does low quality photo page contain extractable text?",
+    "type": "image",
+    "expected_answer": "not found in the provided documents",
+    "expected_numeric": null,
+    "expected_docs": [
+      "lowquality_photo_page.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": "Mostly blank noise"
+  },
+  {
+    "id": "cd001",
+    "question": "Which plant produced more total units?",
+    "type": "cross_doc",
+    "expected_answer": "Plant B",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "cd002",
+    "question": "Compare Plant A and Plant B average efficiency values.",
+    "type": "cross_doc",
+    "expected_answer": "Plant A 86.1% vs Plant B 87.4%",
+    "expected_numeric": null,
+    "expected_docs": [
+      "annual_summary_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q031",
+    "question": "Repeat check: Q1 defect rate?",
+    "type": "table",
+    "expected_answer": "2.1",
+    "expected_numeric": 2.1,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q032",
+    "question": "Repeat check: Q2 defect rate?",
+    "type": "table",
+    "expected_answer": "1.9",
+    "expected_numeric": 1.9,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q033",
+    "question": "Repeat check: Q3 defect rate?",
+    "type": "table",
+    "expected_answer": "1.7",
+    "expected_numeric": 1.7,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q034",
+    "question": "Repeat check: Q4 defect rate?",
+    "type": "table",
+    "expected_answer": "1.5",
+    "expected_numeric": 1.5,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q035",
+    "question": "Repeat check: Q1 defect rate?",
+    "type": "table",
+    "expected_answer": "2.1",
+    "expected_numeric": 2.1,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q036",
+    "question": "Repeat check: Q2 defect rate?",
+    "type": "table",
+    "expected_answer": "1.9",
+    "expected_numeric": 1.9,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q037",
+    "question": "Repeat check: Q3 defect rate?",
+    "type": "table",
+    "expected_answer": "1.7",
+    "expected_numeric": 1.7,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q038",
+    "question": "Repeat check: Q4 defect rate?",
+    "type": "table",
+    "expected_answer": "1.5",
+    "expected_numeric": 1.5,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q039",
+    "question": "Repeat check: Q1 defect rate?",
+    "type": "table",
+    "expected_answer": "2.1",
+    "expected_numeric": 2.1,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  },
+  {
+    "id": "q040",
+    "question": "Repeat check: Q2 defect rate?",
+    "type": "table",
+    "expected_answer": "1.9",
+    "expected_numeric": 1.9,
+    "expected_docs": [
+      "quarterly_report_2025.pdf"
+    ],
+    "expected_pages": [
+      1
+    ],
+    "notes": ""
+  }
+]

@@ -1,0 +1,31 @@
+.env
+.env.local
+*.pyc
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+.venv/
+venv/
+node_modules/
+frontend/.next/
+frontend/out/
+dist/
+build/
+
+# Data caches and indexes (regenerated locally)
+data/index/
+data/cache/
+data/uploads/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Secrets (never commit)
+*.pem
+credentials.json
+secrets.*
